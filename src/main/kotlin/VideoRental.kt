@@ -50,7 +50,7 @@ private fun startVideoRenting() {
 private fun greetCustomer() {
     println()
     println("=======================================")
-    println("Welcome to our videoRental rental shop!")
+    println("   Welcome to our video rental shop!")
     println("=======================================")
     println()
 }
