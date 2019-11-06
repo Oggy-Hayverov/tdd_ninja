@@ -2,14 +2,12 @@ import videoRental.repository.Movie
 import videoRental.repository.MovieRepositoryImpl
 import java.util.*
 
-private const val RED_VAL = "[31m"
-private const val YELLOW_VAL = "[33m"
-private const val CYAN_VAL = "[36m"
 private const val ESCAPE = '\u001B'
 private const val RESET = "$ESCAPE[0m"
-private const val RED = "$ESCAPE$RED_VAL"
-private const val YELLOW = "$ESCAPE$YELLOW_VAL"
-private const val CYAN = "$ESCAPE$CYAN_VAL"
+private const val RED = "$ESCAPE[31m"
+private const val YELLOW = "$ESCAPE[33m"
+private const val CYAN = "$ESCAPE[36m"
+private const val PURPLE = "$ESCAPE[35m"
 
 private val rentalTransactionManager = RentalTransactionManager(MovieRepositoryImpl())
 private val scanner = Scanner(System.`in`)
@@ -61,9 +59,9 @@ private fun printAvailableMovies(availableMovies: List<Movie>) {
     println("~~~ Please enter the number of the movie you wish to borrow ~~~")
     println()
     availableMovies.forEach {
-        println("${it.id} ${it.name} - £${it.price}".prependIndent("    "))
+        println("$PURPLE${it.id} ${it.name} - £${it.price}".prependIndent("    "))
     }
-    println()
+    println(RESET)
     println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~")
 }
 
