@@ -4,12 +4,12 @@ import org.junit.Test
 
 import org.junit.Assert.*
 import videoRental.repository.Movie
-import videoRental.repository.MovieRepository
+import videoRental.repository.MovieRepositoryImpl
 import java.math.BigDecimal
 
-class MovieRepositoryTest {
+class MovieRepositoryImplTest {
 
-    val sut = MovieRepository()
+    val sut = MovieRepositoryImpl()
 
     @Test
     fun testGetAllMovies() {

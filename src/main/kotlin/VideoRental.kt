@@ -1,8 +1,7 @@
 import videoRental.repository.Movie
-import videoRental.repository.MovieRepository
+import videoRental.repository.MovieRepositoryImpl
 import java.util.*
 
-private val rentalTransactionManager = RentalTransactionManager(MovieRepository())
 private const val RED_VAL = "[31m"
 private const val YELLOW_VAL = "[33m"
 private const val CYAN_VAL = "[36m"
@@ -12,8 +11,15 @@ private const val RED = "$ESCAPE$RED_VAL"
 private const val YELLOW = "$ESCAPE$YELLOW_VAL"
 private const val CYAN = "$ESCAPE$CYAN_VAL"
 
+private val rentalTransactionManager = RentalTransactionManager(MovieRepositoryImpl())
+private val scanner = Scanner(System.`in`)
+
 fun main() {
-    val scanner = Scanner(System.`in`)
+    startVideoRenting()
+    return
+}
+
+private fun startVideoRenting() {
     while (true) {
         greetCustomer()
         val availableMovies = rentalTransactionManager.getAvailableMovies()
@@ -26,7 +32,9 @@ fun main() {
             println("$CYAN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             return
         }
+
         val selectionId = scanner.nextLong()
+
         if (rentalTransactionManager.reserveVideo(selectionId)) {
             println("$YELLOW!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             println("$YELLOW!!!  Enjoy the movie  !!!!!!")
@@ -53,7 +61,8 @@ private fun printAvailableMovies(availableMovies: List<Movie>) {
     println("~~~ Please enter the number of the movie you wish to borrow ~~~")
     println()
     availableMovies.forEach {
-        println("${it.id} ${it.name} - £${it.price}".prependIndent("    ")) }
+        println("${it.id} ${it.name} - £${it.price}".prependIndent("    "))
+    }
     println()
     println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~")
 }

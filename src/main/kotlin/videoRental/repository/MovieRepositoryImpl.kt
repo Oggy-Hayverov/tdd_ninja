@@ -2,7 +2,7 @@ package videoRental.repository
 
 import java.math.BigDecimal
 
-class MovieRepository : IMovieRepository {
+class MovieRepositoryImpl : IMovieRepository {
     private val INVALID_INDEX = -1
     private val movies = mutableListOf(
         Movie(1, "Die hard", BigDecimal(7)),
