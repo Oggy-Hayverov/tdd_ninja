@@ -3,6 +3,7 @@ package videoRental.printer
 class ReceiptPrinter : IReceiptPrinter {
     /*todo tdd this receipt printer*/
     override fun printReceipt(movie: String, price: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        /*todo perhaps we want to generate time stamp and print some pattern*/
+        /*todo including movie name, price and date*/
     }
 }

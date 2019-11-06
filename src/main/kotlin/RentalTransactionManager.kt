@@ -7,7 +7,7 @@ class RentalTransactionManager(private val movieRepository: IMovieRepository) {
     }
 
     fun reserveVideo(selectionId: Long): Boolean {
-        /*todo How about printing a receipt when the transaction is successful?*/
+        /*todo New requirement for printing a receipt when the transaction is successful*/
         val videoById = movieRepository.getVideoById(selectionId)
         return when {
             videoById != null && videoById.isReserved.not() -> {
