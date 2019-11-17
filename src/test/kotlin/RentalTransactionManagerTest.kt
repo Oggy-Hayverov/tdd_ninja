@@ -1,8 +1,9 @@
 import junit.framework.Assert.assertEquals
 import org.junit.Test
-import org.mockito.ArgumentMatchers.anyLong
+import org.mockito.ArgumentMatchers.*
 import org.mockito.Mockito
 import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 import videoRental.printer.IReceiptPrinter
 import videoRental.repository.IMovieRepository
 import videoRental.repository.Movie
@@ -53,6 +54,20 @@ class RentalTransactionManagerTest {
     fun testTryingToReserveANonExistentMovie() {
         Mockito.`when`(repository.getVideoById(anyLong())).thenReturn(null)
         assertEquals(false, sut.reserveVideo(1234))
+    }
+
+    @Test
+    fun givenVideoIsAvailableMakeSureWePrintReceipt() {
+        //Arrange
+        val reservedMovie = Movie(12, "Test headline", BigDecimal(3), false)
+        Mockito.`when`(repository.getVideoById(anyLong())).thenReturn(reservedMovie)
+        Mockito.`when`(repository.updateMovie(reservedMovie)).thenReturn(true)
+
+        //Act
+        sut.reserveVideo(123)
+
+        //Assert
+        verify(printManager).printReceipt(anyString(), anyString())
     }
 
 }

@@ -15,7 +15,12 @@ class RentalTransactionManager(
         val videoById = movieRepository.getVideoById(selectionId)
         return when {
             videoById != null && videoById.isReserved.not() -> {
-                movieRepository.updateMovie(videoById.apply { isReserved = true })
+                return if (movieRepository.updateMovie(videoById.apply { isReserved = true })) {
+                    printManager.printReceipt(videoById.name, videoById.price.toString())
+                    true
+                } else {
+                    false
+                }
             }
             else -> false
         }
