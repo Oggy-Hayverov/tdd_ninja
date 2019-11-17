@@ -3,6 +3,7 @@ import org.junit.Test
 import org.mockito.ArgumentMatchers.anyLong
 import org.mockito.Mockito
 import org.mockito.Mockito.mock
+import videoRental.printer.IReceiptPrinter
 import videoRental.repository.IMovieRepository
 import videoRental.repository.Movie
 import java.math.BigDecimal
@@ -10,7 +11,8 @@ import java.math.BigDecimal
 class RentalTransactionManagerTest {
 
     val repository = mock(IMovieRepository::class.java)
-    val sut = RentalTransactionManager(repository)
+    val printManager = mock(IReceiptPrinter::class.java)
+    val sut = RentalTransactionManager(repository, printManager)
 
     private val availableMovies = mutableListOf(
         Movie(1, "Die hard", BigDecimal(7)),

@@ -1,3 +1,5 @@
+import videoRental.printer.IReceiptPrinter
+import videoRental.printer.ReceiptPrinter
 import videoRental.repository.Movie
 import videoRental.repository.MovieRepositoryImpl
 import java.util.*
@@ -9,7 +11,7 @@ private const val YELLOW = "$ESCAPE[33m"
 private const val CYAN = "$ESCAPE[36m"
 private const val PURPLE = "$ESCAPE[35m"
 
-private val rentalTransactionManager = RentalTransactionManager(MovieRepositoryImpl())
+private val rentalTransactionManager = RentalTransactionManager(MovieRepositoryImpl(), ReceiptPrinter())
 private val scanner = Scanner(System.`in`)
 
 fun main() {

@@ -1,7 +1,11 @@
+import videoRental.printer.IReceiptPrinter
 import videoRental.repository.IMovieRepository
 import videoRental.repository.Movie
 
-class RentalTransactionManager(private val movieRepository: IMovieRepository) {
+class RentalTransactionManager(
+    private val movieRepository: IMovieRepository,
+    private val printManager: IReceiptPrinter
+) {
     fun getAvailableMovies(): List<Movie> {
         return movieRepository.getAllMovies().filter { it.isReserved.not() }
     }
